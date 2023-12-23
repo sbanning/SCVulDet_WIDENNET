@@ -1,0 +1,147 @@
+1 10001.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract TimestampAccessControl {
+    address public admin;
+    uint256 public lastAdminChange;
+    constructor() {
+        admin = msg.sender;
+        lastAdminChange = block.timestamp;
+    }
+    modifier onlyAdmin() {
+        require(msg.sender == admin, "Only the admin can call this function");
+        _;
+    }
+    function changeAdmin(address newAdmin) external onlyAdmin {
+        // Allow admin to change only once per week
+        require(block.timestamp >= lastAdminChange + 1 weeks, "Wait at least 1 week before changing admin");
+        admin = newAdmin;
+        lastAdminChange = block.timestamp;
+    }
+}
+1
+----------------------------------------
+2 10002.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+contract TokenVesting {
+    address public beneficiary;
+    uint256 public releaseTime;
+    uint256 public releasedTokens;
+    IERC20 public token;
+    constructor(address _beneficiary, uint256 _releaseTime, address _token) {
+        beneficiary = _beneficiary;
+        releaseTime = _releaseTime;
+        token = IERC20(_token);
+    }
+    function releaseTokens() external {
+        require(block.timestamp >= releaseTime, "Tokens are not yet vested");
+        uint256 unreleased = token.balanceOf(address(this)) - releasedTokens;
+        require(unreleased > 0, "No tokens to release");
+        token.transfer(beneficiary, unreleased);
+        releasedTokens += unreleased;
+    }
+}
+1
+----------------------------------------
+3 10003.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract TimestampSecureContract {
+    address public owner;
+    uint256 public lastInteractionBlock;
+    constructor() {
+        owner = msg.sender;
+        lastInteractionBlock = block.number;
+    }
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only the owner can call this function");
+        _;
+    }
+    function doSomething() external onlyOwner {
+        // Check if 100 blocks have passed since the last interaction
+        require(block.number >= lastInteractionBlock + 100, "Wait for at least 100 blocks between interactions");
+        // Perform some actions
+        // Update the last interaction block
+        lastInteractionBlock = block.number;
+    }
+}
+1
+----------------------------------------
+4 10004.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract MultiSigWallet {
+    address[] public owners;
+    uint256 public requiredSignatures;
+    constructor(address[] memory _owners, uint256 _requiredSignatures) {
+        require(_owners.length > 0 && _requiredSignatures > 0 && _requiredSignatures <= _owners.length, "Invalid parameters");
+        owners = _owners;
+        requiredSignatures = _requiredSignatures;
+    }
+    modifier onlyOwner() {
+        require(isOwner(msg.sender), "Not an owner");
+        _;
+    }
+    function isOwner(address account) public view returns (bool) {
+        for (uint256 i = 0; i < owners.length; i++) {
+            if (owners[i] == account) {
+                return true;
+            }
+        }
+        return false;
+    }
+    function executeTransaction(address to, uint256 value, bytes calldata data) external onlyOwner {
+        // Implement multi-signature logic
+        // Verify the required number of owners have approved the transaction
+        // Execute the transaction if conditions are met
+        // ...
+    }
+}
+0
+----------------------------------------
+5 10005.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+contract TokenSale {
+    address public admin;
+    IERC20 public token;
+    uint256 public tokenPrice;
+    uint256 public tokensSold;
+    event TokensPurchased(address buyer, uint256 amount, uint256 totalTokensSold);
+    constructor(address _admin, IERC20 _token, uint256 _tokenPrice) {
+        admin = _admin;
+        token = _token;
+        tokenPrice = _tokenPrice;
+    }
+    modifier onlyAdmin() {
+        require(msg.sender == admin, "Only the admin can call this function");
+        _;
+    }
+    function purchaseTokens(uint256 amount) external payable {
+        require(msg.value == amount * tokenPrice, "Incorrect ETH amount");
+        token.transfer(msg.sender, amount);
+        tokensSold += amount;
+        emit TokensPurchased(msg.sender, amount, tokensSold);
+    }
+}
+
+0
+----------------------------------------
+6 10006.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract IdentityRegistry {
+    mapping(address => bytes32) public identities;
+    event IdentityRegistered(address indexed user, bytes32 identity);
+    function registerIdentity(bytes32 identity) external {
+        require(identities[msg.sender] == 0x0, "Identity already registered");
+        identities[msg.sender] = identity;
+        emit IdentityRegistered(msg.sender, identity);
+    }
+}
+
+0
+----------------------------------------
