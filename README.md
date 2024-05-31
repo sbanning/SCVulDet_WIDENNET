@@ -1,5 +1,5 @@
-
-WIDENNET is a python implementation of smart contract vulnerability detection using the Wide and Deep Neural Network.
+## Introduction
+WIDENNET is a python implementation of smart contract vulnerability detection using the Wide and Deep Neural Network. The goal to detect smart contracts with **reentrancy** and **timestamp dependency** vulnerabilities. Our methodology is based on the extension of the Wide and Deep Neural Network in the area of smart contract vulnerability detection.
 
 ## Requirements
 
@@ -24,10 +24,6 @@ the dataset on GitHub. Link to the dataset: https://github.com/Messi-Q/Smart-Con
 5. `config\train_data\ts_contracts.txt`
 * dataset for timestamp dependence vulnerability
 
-## Introduction
-WIDENNET is a project that aims to detect smart contracts with **reentrancy** and **timestamp dependency** vulnerabilities. Our methodology is based on the extension
-of the Wide and Deep Neural Network in the area of smart contract vulnerability detection.
-
 ## Code Files
 
 1. `SCVulDet_WIDENNET.py`
@@ -44,7 +40,7 @@ of the Wide and Deep Neural Network in the area of smart contract vulnerability 
 
 
 ## Running Project
-* To run the program:
+* To test WIDENNET:
 1. setup your environment using the packages in the requirements
 2. in the arg_parser.py file, indicate which type of vulnerability by setting the appropriate '--vul_type' as the default value. (default='re_ent' implies you are testing for reentrancy vulnerability)
 3. ensure you have the right dataset in place: reent_contracts.txt for reentrancy, ts_contracts.txt for timestamp dependence. 
