@@ -18,30 +18,43 @@ We utilized a publicly available smart contract dataset from GitHub, published b
 blog posts that analyze contracts. The results of our work were compared against the performance metrics published in the same paper that provided
 the dataset on GitHub. Link to the dataset: https://github.com/Messi-Q/Smart-Contract-Dataset
 
-4. `config\train_data\reent_contracts.txt`
-* dataset for reentrancy vulnerability
+ * dataset for reentrancy vulnerability
+ `config\train_data\reent_contracts.txt`
 
-5. `config\train_data\ts_contracts.txt`
+
 * dataset for timestamp dependence vulnerability
+`config\train_data\ts_contracts.txt`
+
 
 ## Code Files
 
-1. `SCVulDet_WIDENNET.py`
-* this is the main and base class file. It is implemented in python. 
+* this is the main and base class file. It is implemented in python.
+`SCVulDet_WIDENNET.py` 
 
-2. `config\model\Wide_Deep.py`
 * WIDENNET class file.
+  `config\model\Wide_Deep.py`
 
-3. `config\model_metrics.py`
 * contains various metric visualization tools.
+  `config\model_metrics.py`
 
-4. `opcode_vectorizer.py` 
 * opcode vectorizer python file
+  `opcode_vectorizer.py` 
+
 
 
 ## Running Project
 * To test WIDENNET:
 1. setup your environment using the packages in the requirements
-2. in the arg_parser.py file, indicate which type of vulnerability by setting the appropriate '--vul_type' as the default value. (default='re_ent' implies you are testing for reentrancy vulnerability)
-3. ensure you have the right dataset in place: reent_contracts.txt for reentrancy, ts_contracts.txt for timestamp dependence. 
-4. execute SCVulDet_WIDENNET.py file
+2. ensure you have the right dataset in place: `reent_contracts.txt` for reentrancy, `ts_contracts.txt` for timestamp dependence
+3. for vulnerability type: `ts` for timestamp and `re` for reentrancy
+   
+4. For timestamp dependence:
+```
+  python3 SCVulDet_WIDENNET.py .\ts_contracts.txt ts
+```
+   
+4. For reentrancy:
+```
+  python3 SCVulDet_WIDENNET.py .\reent_contracts.txt re
+```
+   
