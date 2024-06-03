@@ -48,12 +48,12 @@ the dataset on GitHub. Link to the dataset: https://github.com/Messi-Q/Smart-Con
 2. ensure you have the right dataset in place: `reent_contracts.txt` for reentrancy, `ts_contracts.txt` for timestamp dependence
 3. for vulnerability type: `ts` for timestamp and `re` for reentrancy
    
-4. For timestamp dependence:
+4. For timestamp dependence, execute the command:
 ```
   python3 SCVulDet_WIDENNET.py .\ts_contracts.txt ts
 ```
    
-4. For reentrancy:
+4. For reentrancy, execute the command:
 ```
   python3 SCVulDet_WIDENNET.py .\reent_contracts.txt re
 ```
