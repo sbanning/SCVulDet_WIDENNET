@@ -1,5 +1,5 @@
 ## Introduction
-WIDENNET is a python implementation of smart contract vulnerability detection using the Wide and Deep Neural Network. The goal to detect smart contracts with **reentrancy** and **timestamp dependency** vulnerabilities. Our methodology is based on the extension of the Wide and Deep Neural Network in the area of smart contract vulnerability detection.
+WIDENNET is a python implementation of smart contract vulnerability detection using the Wide and Deep Neural Network. The goal is to detect smart contracts with **reentrancy** and **timestamp dependency** vulnerabilities. Our methodology is based on the extension of the Wide and Deep Neural Network in the area of smart contract vulnerability detection.
 
 ## Requirements
 
